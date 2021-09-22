@@ -81,55 +81,52 @@ function isLeapYear(year) {
     }
 }
 
-function getNextDate(date)
-{
-    var daysInMonth=[31,28,31,30,31,30,31,31,30,31,30,31];
 
 
-    var day=date.day+1;
-    var month=date.month;
-    var year=date.year
-    if(month===2)
-    {
-        if(isLeapYear(year))
-        {
-            if(day>29)
-            {
-                day=1;
-                month=month+1;
-            }
+function getNextDate(date){
+    var day = date.day + 1;  
+    var month = date.month;
+    var year = date.year;
+  
+    var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; 
 
-        }
-        else{
-            if(day>28)
-            {
-                day=1;
-                month=month+1
-            }
-        }
+    if(month === 2){ 
 
+      if(isLeapYear(year)){ 
+         if(day > 29){ 
+           day = 1;
+           month++;  
+         }
+      }
+      else {
+         if(day > 28){
+           day = 1;
+           month++;  
+         }
+      }
     }
-    else
-    {
-        if(day>daysInMonth[month-1]){
-        day=1
-        month=month+1;
-        }
-        
+
+    else {
+   
+      if(day > daysInMonth[month - 1]){ 
+        day = 1; 
+        month++;  
+      }
     }
-    if(month>12)
-        {
-            month=1;
-            year=year+1;
-        }
+  
+
+    if(month > 12){
+      month = 1;
+      year++; 
+    }
+  
     return {
-        day:day,
-        month:month,
-        year:year
-
+      day: day,  
+      month: month,
+      year: year
     };
-}
-
+  }
+  
 function getNextPalindromeDate(date)
 {
     var ctr=0;
@@ -148,12 +145,6 @@ function getNextPalindromeDate(date)
     return [ctr,nextDate];
 }
 
-var date=
-{
-    day:8,
-    month:8,
-    year:2021
-}
 var dateInputRef=document.querySelector("#bday-input");
 var showBtnRef=document.querySelector("#show-btn");
 var resultRef=document.querySelector("#output");
@@ -178,9 +169,9 @@ function clickHandler1(e)
     }
     else{
             var [ctc,nextDate]=getNextPalindromeDate(date);
+            console.log(nextDate);
             resultRef.innerText=`The next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year},and it is after ${ctc} days`;
 
     }
 }
 showBtnRef.addEventListener("click",clickHandler1);
-console.log(getNextPalindromeDate(date));
